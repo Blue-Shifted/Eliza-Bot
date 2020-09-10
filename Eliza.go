@@ -47,8 +47,12 @@ func main() {
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-    // Ignore messages from bot self.
+    /* Ignore messages from bot self. */
     if m.Author.ID == s.State.User.ID {
+        return
+    }
+    /* Cause apparently pictures will break the bot otherwise. */
+    if m.Content == "" {
         return
     }
     words := strings.Fields(m.Content)
